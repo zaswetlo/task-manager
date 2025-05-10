@@ -18,5 +18,8 @@ func SetupRouter() http.Handler {
 	r.Get("/tasks", handler.GetTasks)
 	r.Post("/tasks", handler.CreateTask)
 	r.Patch("/tasks/{id}", handler.UpdateTask)
+	r.Put("/tasks/{id}", handler.UpdateTaskDetails)
+	r.Delete("/tasks/{id}", handler.DeleteTask)
+	r.Get("/tasks/progress", handler.GetTaskProgress)
 	return r
 }
