@@ -1,6 +1,9 @@
 package storage
 
-import "task-manager/internal/model"
+import (
+	"errors"
+	"task-manager/internal/model"
+)
 
 var tasks = []model.Task{}
 var nextID = 1
@@ -14,4 +17,14 @@ func AddTask(title string) model.Task {
 	nextID++
 	tasks = append(tasks, task)
 	return task
+}
+
+func UpdateTask(id int, done bool) (model.Task, error) {
+	for i, task := range tasks {
+		if task.ID == id {
+			tasks[i].Done = done
+			return tasks[i], nil
+		}
+	}
+	return model.Task{}, errors.New("task not found")
 }
